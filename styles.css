@@ -1,0 +1,13 @@
+.custom-button {
+    background-color: #FF8A00;
+}
+
+.bg {
+    background-image: url(anahuac.jpg);
+    background-position: center center;
+}
+
+body {
+    background: #FF8A00;
+    /* background: linear-gradient(to right, #000000, #FF5900); */
+}
