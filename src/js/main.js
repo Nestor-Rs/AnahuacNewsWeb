@@ -1,1 +1,1 @@
-import './registro.js'
+
