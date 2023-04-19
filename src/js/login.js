@@ -13,6 +13,7 @@ formLogin.addEventListener('submit',async(e)=>{
     try {
         const userCredentials = await signInWithEmailAndPassword(auth,email,password);
         console.log(userCredentials);
+        location.href="index.html";
     } 
     catch (error) {
         console.log(error);
