@@ -21,7 +21,6 @@ querySnapshot.forEach((doc) => {
 for (let i = 0; i < publicaciones.length; i++) {
   //publicaciones[i];
   console.log(publicaciones[i].img);
-<<<<<<< HEAD
   pubhtml.innerHTML+=
   `<div class="card" style="width: 18rem;">
     <img src="${publicaciones[i].img}" class="card-img-top" alt="...">
@@ -31,9 +30,3 @@ for (let i = 0; i < publicaciones.length; i++) {
     </div>
   </div>`;  
 }
-=======
-  pubhtml.innerHTML+='<div class="card" style="width: 18rem;"><img src="'+publicaciones[i].img+'" class="card-img-top" alt="..."><div class="card-body"><h5 class="card-title">'+publicaciones[i].titulo+'</h5><p class="card-text">'+publicaciones[i].texto+'</p></div></div>';  
-}
-
-console.log(publicaciones);
->>>>>>> 1efac02 (log)
