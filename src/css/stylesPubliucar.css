@@ -1,0 +1,24 @@
+.custom-file-upload {
+  display: inline-block;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.custom-file-upload:hover {
+  background-color: #ebebeb;
+}
+
+.fa-cloud-upload {
+  margin-right: 5px;
+}
+
+body {
+    background: #FF8A00;
+    /* background: linear-gradient(to right, #000000, #FF5900); */
+}
+
+.custom_button {
+    background-color: #FF8A00;
+}
