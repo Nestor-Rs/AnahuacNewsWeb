@@ -22,7 +22,7 @@ for (let i = 0; i < publicaciones.length; i++) {
   //publicaciones[i];
   console.log(publicaciones[i].img);
   pubhtml.innerHTML+=
-  `<div class="card" style="width: 18rem;">
+  `<div class="card mb-5" style="width: 18rem;">
     <img src="${publicaciones[i].img}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${publicaciones[i].titulo}</h5>

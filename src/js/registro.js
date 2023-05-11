@@ -13,6 +13,7 @@ registerForm.addEventListener('submit',async(e)=>{
         const userCredentials = await createUserWithEmailAndPassword(auth,email,password);
         console.log(userCredentials);
         alert("Registro Correcto")
+        location.href="login.html";
     } 
     catch (error) {
         console.log(error);
