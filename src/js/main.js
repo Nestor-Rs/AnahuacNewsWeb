@@ -30,3 +30,5 @@ for (let i = 0; i < publicaciones.length; i++) {
     </div>
   </div>`;  
 }
+
+console.log(publicaciones);
