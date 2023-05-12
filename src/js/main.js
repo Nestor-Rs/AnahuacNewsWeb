@@ -14,7 +14,7 @@ const pubhtml = document.querySelector('#publicaciones');
 const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
-  var pub=new publicacion(doc.id,doc.data().titulo,doc.data().texto,doc.data().img);
+  var pub=new publicacion(doc.id,doc.data().titulo,doc.data().texto,doc.data().img,doc.data().escuela);
   publicaciones.push(pub);
 });
 
@@ -31,4 +31,4 @@ for (let i = 0; i < publicaciones.length; i++) {
   </div>`;  
 }
 
-console.log(publicaciones);
+console.log();
