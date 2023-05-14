@@ -5,6 +5,8 @@ import { publicacion } from "./publicacion.js";
 //import {updatePub} from './update.js';
 //esta es la funcion para crear una publicacion, se le envia db y el objeto
 //import {createPub} from './create.js';
+//esta es la funcion para eliminar una publicacion, se le envia db y id del objeto
+//import {deletePub} from './delete.js';
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
@@ -39,5 +41,6 @@ for (let i = 0; i < publicaciones.length; i++) {
 </div>
 `;  
 }
+
 
 //console.log(publicaciones[0].id);
