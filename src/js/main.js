@@ -24,13 +24,16 @@ for (let i = 0; i < publicaciones.length; i++) {
   //publicaciones[i];
   //Añadir filtro
   pubhtml.innerHTML+=
-  `<div class="card mb-5" style="width: 18rem;">
+  `<div class="d-flex justify-content-center mt-5">
+  <div class="card mb-5 mx-auto" style="width: 18rem;">
     <img src="${publicaciones[i].img}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${publicaciones[i].titulo}</h5>
       <p class="card-text">${publicaciones[i].texto}</p>
     </div>
-  </div>`;  
+  </div>
+</div>
+`;  
 }
 
 //console.log(publicaciones[0].id);
