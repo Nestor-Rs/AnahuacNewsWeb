@@ -1,7 +1,7 @@
 import { app } from "./firebase.js";
 import { getFirestore,collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
 import { publicacion } from "./publicacion.js";
-
+import {updatePub} from './update.js';
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
@@ -14,13 +14,15 @@ const pubhtml = document.querySelector('#publicaciones');
 const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
-  var pub=new publicacion(doc.id,doc.data().titulo,doc.data().texto,doc.data().img,doc.data().escuela);
-  publicaciones.push(pub);
+  if (doc.data().disponible==true) {
+    var pub=new publicacion(doc.id,doc.data().titulo,doc.data().texto,doc.data().img,doc.data().escuela); 
+    publicaciones.push(pub);
+  }
 });
 
 for (let i = 0; i < publicaciones.length; i++) {
   //publicaciones[i];
-  console.log(publicaciones[i].img);
+  //Añadir filtro
   pubhtml.innerHTML+=
   `<div class="card mb-5" style="width: 18rem;">
     <img src="${publicaciones[i].img}" class="card-img-top" alt="...">
@@ -31,4 +33,4 @@ for (let i = 0; i < publicaciones.length; i++) {
   </div>`;  
 }
 
-console.log();
+//console.log(publicaciones[0].id);
