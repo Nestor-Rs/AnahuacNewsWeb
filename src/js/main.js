@@ -1,7 +1,11 @@
 import { app } from "./firebase.js";
 import { getFirestore,collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
 import { publicacion } from "./publicacion.js";
-import {updatePub} from './update.js';
+//esta es la funcion para actualizar una publicacion, se le envia db y el objeto
+//import {updatePub} from './update.js';
+//esta es la funcion para crear una publicacion, se le envia db y el objeto
+//import {createPub} from './create.js';
+
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
