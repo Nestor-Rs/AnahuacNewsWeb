@@ -1,5 +1,5 @@
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
-import { publicacion } from "./publicacion";
+import { publicacion } from "./publicacion.js";
 import {db} from "./main.js"
 const form = document.querySelector('#');
 
