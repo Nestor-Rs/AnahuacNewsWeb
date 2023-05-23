@@ -21,14 +21,13 @@ formLogin.addEventListener('submit',async(e)=>{
     //constantes
     //const email = formLogin['email'].value;
     //const password = formLogin['contrasena'].value;
-    const newPublicacion = new publicacion('00',form['publication_title'].value, form['publication_content'].value, form['publication_image'].value, form["sel1"].value);
+    const newPublicacion = new publicacion('00',form['publication_title'].value, form['publication_content'].value, "https://imgur.com/FjN9kSw"/* form['publication_image'].value, */ ,"Ingenieria");
 
-    createPub(db, newPublicacion);
+    
     //console.log(email,password);
     
     try {
-        const userCredentials = await signInWithEmailAndPassword(auth,email,password);
-        console.log(userCredentials);
+        createPub(db, newPublicacion);
         location.href="index.html";
     } 
     catch (error) {
