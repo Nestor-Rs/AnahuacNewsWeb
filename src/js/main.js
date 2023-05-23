@@ -1,5 +1,5 @@
-import { app } from "./firebase.js";
-import { getFirestore,collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
+import { db } from "./firebase.js";
+import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
 import { publicacion } from "./publicacion.js";
 //esta es la funcion para actualizar una publicacion, se le envia db y el objeto
 //import {updatePub} from './update.js';
@@ -9,7 +9,7 @@ import { publicacion } from "./publicacion.js";
 //import {deletePub} from './delete.js';
 
 // Initialize Cloud Firestore and get a reference to the service
-export const db = getFirestore(app);
+
 
 const q = query(collection(db, "Publicaciones"));
 

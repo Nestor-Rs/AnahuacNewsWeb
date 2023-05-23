@@ -1,7 +1,8 @@
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
 import { publicacion } from "./publicacion.js";
-import {db} from "./main.js"
-const form = document.querySelector('#');
+import {db} from "./firebase.js"
+
+const form = document.querySelector('#subPub');
 
 // Add a new document with a generated id.
 export async function createPub(db, newData) {
@@ -14,9 +15,10 @@ export async function createPub(db, newData) {
         escuela:newData.escuela
       });
     console.log("Document written with ID: ", docRef.id);
+    location.href="index.html";
 }
 
-formLogin.addEventListener('submit',async(e)=>{
+form.addEventListener('submit',async(e)=>{
     e.preventDefault();
     //constantes
     //const email = formLogin['email'].value;
@@ -28,7 +30,6 @@ formLogin.addEventListener('submit',async(e)=>{
     
     try {
         createPub(db, newPublicacion);
-        location.href="index.html";
     } 
     catch (error) {
         console.log(error);
