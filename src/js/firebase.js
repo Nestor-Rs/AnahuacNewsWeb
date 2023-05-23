@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
 import { getFirestore} from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"
+import { getStorage } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-storage.js"
 //librerias https://firebase.google.com/docs/web/learn-more?hl=es-419#available-libraries
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,3 +20,5 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 //DB
 export const db = getFirestore(app);
+//Almacenamiento de imagen
+export const storage = getStorage(app);
