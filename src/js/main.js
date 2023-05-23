@@ -86,6 +86,7 @@ onAuthStateChanged(auth, async (user) => {
         pubNormal();
       }
     } else {
+      pubNormal();
     }
   })
 
