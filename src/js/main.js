@@ -21,9 +21,20 @@ const pubhtml = document.querySelector('#publicaciones');
 
 const querySnapshot = await getDocs(q);
 
+// Obtener la URL actual
+const url = new URL(window.location.href);
+
+// Obtener el valor de un parámetro específico
+const parametro = url.searchParams.get('filtro');
+
+
 querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
-  if (doc.data().disponible==true) {
+  if (doc.data().disponible==true && parametro==null) {
+    var pub=new publicacion(doc.id,doc.data().titulo,doc.data().texto,doc.data().img,doc.data().escuela); 
+    publicaciones.push(pub);
+  }
+  else if(doc.data().disponible==true && parametro==doc.data().escuela){
     var pub=new publicacion(doc.id,doc.data().titulo,doc.data().texto,doc.data().img,doc.data().escuela); 
     publicaciones.push(pub);
   }
