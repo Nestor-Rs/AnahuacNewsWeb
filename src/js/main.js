@@ -1,7 +1,8 @@
-import { db } from "./firebase.js";
-import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
+import { db,auth } from "./firebase.js";
+import { collection, query, where, getDocs,getDoc,doc } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
 import { publicacion } from "./publicacion.js";
 import { deletePub } from "./delete.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
 //esta es la funcion para actualizar una publicacion, se le envia db y el objeto
 //import {updatePub} from './update.js';
 //esta es la funcion para crear una publicacion, se le envia db y el objeto
@@ -19,6 +20,7 @@ let publicaciones=[];
 const pubhtml = document.querySelector('#publicaciones');
 
 const querySnapshot = await getDocs(q);
+
 querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
   if (doc.data().disponible==true) {
@@ -27,27 +29,65 @@ querySnapshot.forEach((doc) => {
   }
 });
 
-for (let i = 0; i < publicaciones.length; i++) {
-  //publicaciones[i];
-  //Añadir filtro
-  const cardId = `${publicaciones[i].id}`;
-  pubhtml.innerHTML += `
-<div class="d-flex justify-content-center mt-5">
-  <div class="card mb-5 mx-auto" style="width: 18rem;">
-    <div class="card-header text-end">
-      <button type="button" class="btn btn-primary bi bi-pencil"></button>
-      <button type="button" class="btn btn-danger bi bi-x-circle delete-button" data-card-id="${cardId}"></button>
-    </div>
-    <img src="${publicaciones[i].img}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">${publicaciones[i].titulo}</h5>
-      <p class="card-text">${publicaciones[i].texto}</p>
+function pubAdmin() {
+  for (let i = 0; i < publicaciones.length; i++) {
+    //publicaciones[i];
+    //Añadir filtro
+    const cardId = `${publicaciones[i].id}`;
+    pubhtml.innerHTML += `
+  <div class="d-flex justify-content-center mt-5">
+    <div class="card mb-5 mx-auto" style="width: 18rem;">
+      <div class="card-header text-end">
+        <button type="button" class="btn btn-primary bi bi-pencil"></button>
+        <button type="button" class="btn btn-danger bi bi-x-circle delete-button" data-card-id="${cardId}"></button>
+      </div>
+      <img src="${publicaciones[i].img}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${publicaciones[i].titulo}</h5>
+        <p class="card-text">${publicaciones[i].texto}</p>
+      </div>
     </div>
   </div>
-</div>
-`;
-console.log(cardId);
+  `;
+  }
 }
+
+function pubNormal() {
+  for (let i = 0; i < publicaciones.length; i++) {
+    //publicaciones[i];
+    //Añadir filtro
+    pubhtml.innerHTML += `
+  <div class="d-flex justify-content-center mt-5">
+    <div class="card mb-5 mx-auto" style="width: 18rem;">
+      <img src="${publicaciones[i].img}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${publicaciones[i].titulo}</h5>
+        <p class="card-text">${publicaciones[i].texto}</p>
+      </div>
+    </div>
+  </div>
+  `;
+  }
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+      const uid = user.uid;
+      const docRef = doc(db, "Users", uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        if (docSnap.data().admin===true) {
+          pubAdmin();
+        }
+        else{
+          pubNormal();
+        }
+      } else {
+        pubNormal();
+      }
+    } else {
+    }
+  })
 
 // Select all delete buttons
 const deleteButtons = pubhtml.querySelectorAll('.delete-button');
