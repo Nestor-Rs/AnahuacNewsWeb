@@ -1,7 +1,9 @@
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
-import { publicacion } from "./publicacion";
-import {db} from "./main.js"
-const form = document.querySelector('#');
+import { publicacion } from "./publicacion.js";
+import {db,storage} from "./firebase.js"
+import { ref,uploadBytes,getDownloadURL} from "https://www.gstatic.com/firebasejs/9.19.1/firebase-storage.js"
+
+const form = document.querySelector('#subPub');
 
 // Add a new document with a generated id.
 export async function createPub(db, newData) {
@@ -14,23 +16,26 @@ export async function createPub(db, newData) {
         escuela:newData.escuela
       });
     console.log("Document written with ID: ", docRef.id);
+    location.href="index.html";
 }
 
-formLogin.addEventListener('submit',async(e)=>{
+form.addEventListener('submit',async(e)=>{
     e.preventDefault();
     //constantes
-    //const email = formLogin['email'].value;
-    //const password = formLogin['contrasena'].value;
-    const newPublicacion = new publicacion('00',form['publication_title'].value, form['publication_content'].value, form['publication_image'].value, form["sel1"].value);
+    const archivoref = ref(storage, `img/${form['publication_image'].files[0].name}`);
 
-    createPub(db, newPublicacion);
-    //console.log(email,password);
-    
     try {
-        const userCredentials = await signInWithEmailAndPassword(auth,email,password);
-        console.log(userCredentials);
-        location.href="index.html";
-    } 
+        
+        uploadBytes(archivoref, form['publication_image'].files[0]).then((snapshot) => {
+            getDownloadURL(archivoref).then((url) => {
+                const newPublicacion = new publicacion('00',form['publication_title'].value, form['publication_content'].value, url,form['sel1'].value);
+                createPub(db, newPublicacion);
+            });
+        });
+        
+        //const newPublicacion = new publicacion('00',form['publication_title'].value, form['publication_content'].value, "https://imgur.com/FjN9kSw" ,"Ingenieria");
+        //createPub(db, newPublicacion);
+    }
     catch (error) {
         console.log(error);
         alert(error.message);
