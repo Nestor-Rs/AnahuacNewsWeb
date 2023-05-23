@@ -16,7 +16,7 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.19.1/fi
 const q = query(collection(db, "Publicaciones"));
 
 let publicaciones=[];
-
+const menu = document.querySelector('#menu_ul');
 const pubhtml = document.querySelector('#publicaciones');
 
 const querySnapshot = await getDocs(q);
@@ -89,6 +89,11 @@ onAuthStateChanged(auth, async (user) => {
       if (docSnap.exists()) {
         if (docSnap.data().admin===true) {
           pubAdmin();
+          menu.innerHTML+=`
+          <li class="nav-item">
+            <a href="./subirPublicacion.html"><button type="button" class="btn" style="color: white; border-color: white;">Crear Publicación</button></a>
+          </li>
+          `;
         }
         else{
           pubNormal();
@@ -99,7 +104,7 @@ onAuthStateChanged(auth, async (user) => {
     } else {
       pubNormal();
     }
-  })
+  });
 
 // Select all delete buttons
 const deleteButtons = pubhtml.querySelectorAll('.delete-button');
