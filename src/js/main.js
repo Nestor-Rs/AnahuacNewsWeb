@@ -1,6 +1,7 @@
 import { app } from "./firebase.js";
 import { getFirestore,collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
 import { publicacion } from "./publicacion.js";
+import { deletePub } from "./delete.js";
 //esta es la funcion para actualizar una publicacion, se le envia db y el objeto
 //import {updatePub} from './update.js';
 //esta es la funcion para crear una publicacion, se le envia db y el objeto
@@ -29,9 +30,14 @@ querySnapshot.forEach((doc) => {
 for (let i = 0; i < publicaciones.length; i++) {
   //publicaciones[i];
   //Añadir filtro
-  pubhtml.innerHTML+=
-  `<div class="d-flex justify-content-center mt-5">
+  const cardId = `${publicaciones[i].id}`;
+  pubhtml.innerHTML += `
+<div class="d-flex justify-content-center mt-5">
   <div class="card mb-5 mx-auto" style="width: 18rem;">
+    <div class="card-header text-end">
+      <button type="button" class="btn btn-primary bi bi-pencil"></button>
+      <button type="button" class="btn btn-danger bi bi-x-circle delete-button" data-card-id="${cardId}"></button>
+    </div>
     <img src="${publicaciones[i].img}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${publicaciones[i].titulo}</h5>
@@ -39,8 +45,28 @@ for (let i = 0; i < publicaciones.length; i++) {
     </div>
   </div>
 </div>
-`;  
+`;
+console.log(cardId);
 }
 
+// Select all delete buttons
+const deleteButtons = pubhtml.querySelectorAll('.delete-button');
+
+// Add event listener to each delete button
+deleteButtons.forEach((button) => {
+  button.addEventListener('click', confirmarEliminar);
+  button.addEventListener('click', deleteCard);
+});
+
+async function confirmarEliminar() {
+  window.confirm("¿Esta seguro de eliminar esta publicación?");
+
+}
+
+function deleteCard(event){
+  const cardId = event.target.getAttribute('data-card-id');
+  deletePub(db, cardId);
+  console.log(cardId);
+}
 
 //console.log(publicaciones[0].id);
