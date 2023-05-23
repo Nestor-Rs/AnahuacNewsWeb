@@ -42,5 +42,4 @@ for (let i = 0; i < publicaciones.length; i++) {
 `;  
 }
 
-
 //console.log(publicaciones[0].id);
