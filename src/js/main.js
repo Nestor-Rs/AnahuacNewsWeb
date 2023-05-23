@@ -2,7 +2,7 @@ import { db,auth } from "./firebase.js";
 import { collection, query, where, getDocs,getDoc,doc } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
 import { publicacion } from "./publicacion.js";
 import { deletePub } from "./delete.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+import { onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
 //esta es la funcion para actualizar una publicacion, se le envia db y el objeto
 //import {updatePub} from './update.js';
 //esta es la funcion para crear una publicacion, se le envia db y el objeto
@@ -124,6 +124,14 @@ function deleteCard(event){
   const cardId = event.target.getAttribute('data-card-id');
   deletePub(db, cardId);
   console.log(cardId);
+}
+
+function logOut() {
+  signOut(auth).then(() => {
+    alert("Sign-out successful.")
+  }).catch((error) => {
+    alert(error)
+  });
 }
 
 //console.log(publicaciones[0].id);
