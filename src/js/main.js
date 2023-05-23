@@ -126,12 +126,15 @@ function deleteCard(event){
   console.log(cardId);
 }
 
-function logOut() {
+ function logOut() {
   signOut(auth).then(() => {
     alert("Sign-out successful.")
+    location.href="index.html";
   }).catch((error) => {
     alert(error)
   });
 }
+
+
 
 //console.log(publicaciones[0].id);
